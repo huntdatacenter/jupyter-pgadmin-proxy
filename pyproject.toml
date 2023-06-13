@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jupyter-pgadmin-proxy"
+version = "0.0.3"
+authors = [
+  { name="Matus Kosut", email="matus.kosut@ntnu.no" },
+  { name="Diepiriye Okujagu", email="diepiriye.d.okujagu@ntnu.no" },
+]
+description = "Jupyter server proxy for pgadmin"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">=3.8"
+dependencies = [
+    "jupyter-server-proxy>=3.2.2",
+]
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+keywords = [
+    "Jupyter Proxy",
+    "Jupyter Server Proxy",
+    "JupyterLab",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/huntdatacenter/jupyter-pgadmin-proxy"
+
+[project.optional-dependencies]
+dev = ["black", "ruamel.yaml", "pytest", "pytest-cov"]
+
+[project.entry-points.jupyter_serverproxy_servers]
+pgadmin = "jupyter-pgadmin-proxy:run_app"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jupyter-pgadmin-proxy"]
+
+[tool.hatch.build]
+sources = ["src"]
+artifacts = [
+  "*.svg",
+]
+
+[tool.hatch.build.targets.sdist]
+artifacts = []
+exclude = [".github"]
+
+[tool.hatch.build.targets.jupyter-pgadmin-proxy]
