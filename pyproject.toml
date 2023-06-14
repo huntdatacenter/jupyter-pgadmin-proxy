@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jupyter-pgadmin-proxy"
-version = "0.0.3"
+version = "0.0.1"
 authors = [
   { name="Matus Kosut", email="matus.kosut@ntnu.no" },
   { name="Diepiriye Okujagu", email="diepiriye.d.okujagu@ntnu.no" },
@@ -15,6 +15,10 @@ license = { file = "LICENSE.md" }
 requires-python = ">=3.8"
 dependencies = [
     "jupyter-server-proxy>=3.2.2",
+    "pgadmin4",
+    "simple-websocket",
+    "psycopg",
+    "uwsgi"
 ]
 classifiers = [
     "Framework :: Jupyter",
@@ -54,6 +58,6 @@ artifacts = [
 
 [tool.hatch.build.targets.sdist]
 artifacts = []
-exclude = [".github"]
+exclude = [".github", "setup", "Makefile", "docker-compose.yml"]
 
 [tool.hatch.build.targets.jupyter-pgadmin-proxy]
