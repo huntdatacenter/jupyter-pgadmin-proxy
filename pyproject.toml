@@ -44,11 +44,11 @@ keywords = [
 dev = ["black", "ruamel.yaml", "pytest", "pytest-cov"]
 
 [project.entry-points.jupyter_serverproxy_servers]
-pgadmin = "jupyter-pgadmin-proxy:run_app"
+pgadmin = "jupyter_pgadmin_proxy:run_app"
 
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/jupyter-pgadmin-proxy"]
+packages = ["src/jupyter_pgadmin_proxy"]
 
 [tool.hatch.build]
 sources = ["src"]
@@ -60,4 +60,4 @@ artifacts = [
 artifacts = []
 exclude = [".github", "setup", "Makefile", "docker-compose.yml"]
 
-[tool.hatch.build.targets.jupyter-pgadmin-proxy]
+[tool.hatch.build.targets.jupyter_pgadmin_proxy]
