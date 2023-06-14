@@ -3,7 +3,6 @@ import logging
 import shutil
 import pwd
 import getpass
-from jupyter-pgadmin-proxy.jupyter_config import config
 
 
 def _get_env(port, base_url):
