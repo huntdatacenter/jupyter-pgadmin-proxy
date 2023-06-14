@@ -29,12 +29,6 @@ def get_icon_path():
     )
 
 
-def _get_timeout(default=15):
-    try:
-        return float(os.getenv('RSESSION_TIMEOUT', default))
-    except Exception:
-        return default
-
 
 def get_system_user():
     try:
@@ -77,7 +71,7 @@ def run_app():
         "absolute_url": True,
         # "rewrite_response": rewrite_netloc,
         "launcher_entry": {
-            "title": "pgadmin",
+            "title": "pgAdmin4",
             "icon_path": icon_path
         },
     }
