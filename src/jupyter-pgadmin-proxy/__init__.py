@@ -3,7 +3,7 @@ import logging
 import shutil
 import pwd
 import getpass
-from jupyter_pgweb_proxy.jupyter_config import config
+from jupyter-pgadmin-proxy.jupyter_config import config
 
 
 def _get_env(port, base_url):
@@ -19,14 +19,14 @@ def _get_env(port, base_url):
     """
 
     return {
-        "PGWEB_RUN_PORT": str(port),
-        "PGWEB_URL_PREFIX": f"{base_url}pgweb/".lstrip("/"),
+        "PGADMIN_RUN_PORT": str(port),
+        "PGADMIN_URL_PREFIX": f"{base_url}pgadmin/".lstrip("/"),
     }
 
 
 def get_icon_path():
     return os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "pgweb.svg"
+        os.path.dirname(os.path.abspath(__file__)), "pgadmin.svg"
     )
 
 
@@ -52,15 +52,15 @@ def run_app():
     """
 
     logging.basicConfig(level="INFO")
-    logger = logging.getLogger("pgweb")
+    logger = logging.getLogger("pgadmin")
     logger.setLevel("INFO")
-    logger.info("Initializing Jupyter pgweb Proxy")
+    logger.info("Initializing Jupyter pgadmin Proxy")
 
     icon_path = get_icon_path()
     try:
-        executable_name = shutil.which("pgweb")
+        executable_name = shutil.which("pgadmin")
     except Exception:
-        executable_name = "pgweb"
+        executable_name = "pgadmin"
     host = "127.0.0.1"
     user = get_system_user()
     logger.debug(f"[{user}] Icon_path:  {icon_path}")
@@ -78,7 +78,7 @@ def run_app():
         "absolute_url": True,
         # "rewrite_response": rewrite_netloc,
         "launcher_entry": {
-            "title": "pgweb",
+            "title": "pgadmin",
             "icon_path": icon_path
         },
     }
