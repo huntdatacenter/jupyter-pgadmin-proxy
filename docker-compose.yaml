@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  jupyterlab:
+    image: jupyter/pgadmin:test
+    build:
+      context: "."
+      dockerfile: setup/Dockerfile
+    container_name: pgadmin-jupyterlab
+    restart: always
+    ports:
+      - 8888:8888
+    environment:
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres
+    volumes:
+      - "${PWD}:/home/jovyan/jupyter-pgadmin-proxy"
+  postgres:
+    image: postgres:15.3-alpine
+    hostname: postgres
+    container_name: pgadmin-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    name: db
+

@@ -1,0 +1,5 @@
+.git
+__pycache__
+docker-compose.yaml
+Makefile
+.gitignore
