@@ -51,9 +51,9 @@ def run_app():
 
     icon_path = get_icon_path()
     try:
-        executable_name = shutil.which("pgadmin")
+        executable_name = shutil.which("pgAdmin4")
     except Exception:
-        executable_name = "pgadmin"
+        executable_name = "pgAdmin4"
     host = "127.0.0.1"
     user = get_system_user()
     logger.debug(f"[{user}] Icon_path:  {icon_path}")
