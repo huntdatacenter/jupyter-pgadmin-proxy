@@ -20,10 +20,19 @@ def _get_env(port, base_url):
     Returns:
         [Dict]: Containing environment settings to launch the Web application.
     """
+    logger.info(f"pgAdmin ENV: {base_url}pgadmin4/")
 
-    return {
-        "PGADMIN_RUN_PORT": str(port),
-        "PGADMIN_URL_PREFIX": f"{base_url}pgadmin/".lstrip("/"),
+    default_email = os.getenv("PGADMIN_DEFAULT_EMAIL", "pgadmin4@pgadmin.org")
+    setup_email = os.getenv("PGADMIN_SETUP_EMAIL", "pgadmin4@pgadmin.org")
+     return {
+        "PGADMIN_SERVER_MODE": 'True',
+        "PGADMIN_DEFAULT_EMAIL": default_email,
+        "PGADMIN_SETUP_EMAIL": setup_email,
+        "PGADMIN_SETUP_PASSWORD": "",
+        "PGADMIN_LISTEN_PORT": str(port),
+        "APPLICATION_ROOT": f"{base_url}pgadmin4/",
+        "SCRIPT_NAME": f"{base_url}pgadmin4/",
+        "REMOTE_USER": os.getenv("USER", os.getenv("NB_USER", "nobody")),
     }
 
 
