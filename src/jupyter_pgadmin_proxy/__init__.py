@@ -3,6 +3,7 @@ import logging
 import shutil
 import pwd
 import getpass
+import site
 
 logging.basicConfig(level="INFO")
 logger = logging.getLogger("pgadmin")
@@ -24,7 +25,7 @@ def _get_env(port, base_url):
 
     default_email = os.getenv("PGADMIN_DEFAULT_EMAIL", "pgadmin4@pgadmin.org")
     setup_email = os.getenv("PGADMIN_SETUP_EMAIL", "pgadmin4@pgadmin.org")
-     return {
+    return {
         "PGADMIN_SERVER_MODE": 'True',
         "PGADMIN_DEFAULT_EMAIL": default_email,
         "PGADMIN_SETUP_EMAIL": setup_email,
@@ -57,7 +58,7 @@ def run_app():
     This method is run by jupyter-server-proxy package to launch the Web app.
     """
 
-    logger.info("Initializing Jupyter pgadmin Proxy")
+    logger.info("Initializing Jupyter pgAdmin Proxy")
 
     icon_path = get_icon_path()
     try:
@@ -66,20 +67,31 @@ def run_app():
         executable_name = "pgadmin4"
     host = "127.0.0.1"
     user = get_system_user()
+    try:
+        chdir_path = f"{site.getsitepackages()[0]}/pgadmin4"
+        if not os.path.exists(chdir_path):
+            chdir_path = os.path.dirname(os.path.abspath(__file__))
+    except Exception:
+        chdir_path = "/"
     logger.debug(f"[{user}] Icon_path:  {icon_path}")
     logger.debug(f"[{user}] Launch Command: {executable_name}")
     return {
         "command": [
-            executable_name,
-            f"--host={host}",
-            "--listen={port}",
-            "--debug",
-            "--sessions",
+            # executable_name,
+            "uwsgi",
+            "--http-socket", "127.0.0.1:{port}",
+            "--mount", "{base_url}pgadmin4/=pgAdmin4:app",
+            "--chdir", chdir_path,
+            "--manage-script-name",
+            "--processes", "1",
+            "--threads", "25",
+            "--need-app",
         ],
-        "timeout": 100,
+        "timeout": 300,
         "environment": _get_env,
         "absolute_url": True,
         # "rewrite_response": rewrite_netloc,
+        # "request_headers_override": {"X-Script-Name": "{base_url}pgadmin4/"},
         "launcher_entry": {
             "title": "pgAdmin4",
             "icon_path": icon_path
