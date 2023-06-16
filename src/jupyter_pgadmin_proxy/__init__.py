@@ -4,6 +4,10 @@ import shutil
 import pwd
 import getpass
 
+logging.basicConfig(level="INFO")
+logger = logging.getLogger("pgadmin")
+logger.setLevel("INFO")
+
 
 def _get_env(port, base_url):
     """
@@ -44,9 +48,6 @@ def run_app():
     This method is run by jupyter-server-proxy package to launch the Web app.
     """
 
-    logging.basicConfig(level="INFO")
-    logger = logging.getLogger("pgadmin")
-    logger.setLevel("INFO")
     logger.info("Initializing Jupyter pgadmin Proxy")
 
     icon_path = get_icon_path()
