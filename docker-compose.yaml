@@ -28,9 +28,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - db:/var/lib/postgresql/data
+      - pgtestdb:/var/lib/postgresql/data
 
 volumes:
-  db:
-    name: db
+  pgtestdb: {}
 
