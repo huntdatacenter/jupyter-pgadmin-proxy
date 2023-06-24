@@ -24,6 +24,14 @@ import sys  # noqa
 
 # from pgadmin.utils import env
 
+
+TRUTHY = ("true", "1", "yes", "on", "y")
+
+
+def truthy(val):
+    return str(val).strip('"').strip("'").lower() in TRUTHY
+
+
 ##########################################################################
 # Application settings
 ##########################################################################
@@ -115,11 +123,11 @@ NODE_BLACKLIST = []
 #       SESSION_DB_PATH, STORAGE_DIR, KERBEROS_CCACHE_DIR, and
 #       AZURE_CREDENTIAL_CACHE_DIR
 
-if (not hasattr(builtins, 'SERVER_MODE')) or builtins.SERVER_MODE is None:
-    SERVER_MODE = True
-else:
-    SERVER_MODE = builtins.SERVER_MODE
-# SERVER_MODE = False
+# if (not hasattr(builtins, 'SERVER_MODE')) or builtins.SERVER_MODE is None:
+#     SERVER_MODE = True
+# else:
+#     SERVER_MODE = builtins.SERVER_MODE
+SERVER_MODE = truthy(os.getenv('PGADMIN_SERVER_MODE'))
 
 # HTTP headers to search for CSRF token when it is not provided in the form.
 # Default is ['X-CSRFToken', 'X-CSRF-Token']
@@ -334,7 +342,7 @@ MAX_SESSION_IDLE_TIME = 60
 # Using PGPASS file
 # postgresql://username@host:port?options=-csearch_path=pgadmin
 ##########################################################################
-CONFIG_DATABASE_URI = ''
+CONFIG_DATABASE_URI = ""
 
 ##########################################################################
 # User account and settings storage
@@ -584,7 +592,7 @@ ALLOW_SAVE_TUNNEL_PASSWORD = False
 # Master password is used to encrypt/decrypt saved server passwords
 # Applicable for desktop mode only
 ##########################################################################
-MASTER_PASSWORD_REQUIRED = True
+MASTER_PASSWORD_REQUIRED = truthy(os.getenv("MASTER_PASSWORD_REQUIRED"))
 
 ##########################################################################
 

@@ -14,11 +14,11 @@ readme = "README.md"
 license = { file = "LICENSE.md" }
 requires-python = ">=3.8"
 dependencies = [
-    "jupyter-server-proxy>=3.2.2",
+    "jupyter-server-proxy>=3.2.2,<4.0.0",
     "pgadmin4",
     "simple-websocket",
     "psycopg",
-    "uwsgi"
+    "gunicorn",
 ]
 classifiers = [
     "Framework :: Jupyter",
