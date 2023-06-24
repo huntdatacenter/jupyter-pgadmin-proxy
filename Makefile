@@ -24,6 +24,7 @@ up: build  ## Run docker compose service
 
 down:  ## Stop docker compose service
 	docker compose down
+	docker compose down --volumes
 
 rebuild: down up  ## Rebuild docker compose service
 
