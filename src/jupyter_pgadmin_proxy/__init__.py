@@ -10,6 +10,13 @@ logger = logging.getLogger("pgAdmin4")
 logger.setLevel("INFO")
 
 
+TRUTHY = ("true", "1", "yes", "on", "y")
+
+
+def truthy(val):
+    return str(val).strip('"').strip("'").lower() in TRUTHY
+
+
 def _get_env(port, base_url):
     """
     Returns a dict containing environment settings to launch the Web App.
@@ -94,6 +101,7 @@ def run_app():
         # "request_headers_override": {"X-Script-Name": "{base_url}pgadmin"},
         "launcher_entry": {
             "title": "pgAdmin4",
-            "icon_path": icon_path
+            "icon_path": icon_path,
+            "enabled": truthy(os.getenv("PGADMIN_ENABLED", "true")),
         },
     }
