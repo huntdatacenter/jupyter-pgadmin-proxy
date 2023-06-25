@@ -16,6 +16,7 @@ services:
       PGDATABASE: postgres
       PGUSER: postgres
       PGPASSWORD: postgres
+      # PGADMIN_ENABLED: 'false'
     volumes:
       - "${PWD}:/home/jovyan/jupyter-pgadmin-proxy"
   postgres:
