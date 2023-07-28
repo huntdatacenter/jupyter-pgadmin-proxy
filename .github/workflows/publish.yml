@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 name: Publish package
-=======
 # This workflow will upload a Python Package using Twine when a release is created
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
 
@@ -10,13 +8,11 @@ name: Publish package
 # documentation.
 
 name: Upload Python Package
->>>>>>> e0aa78494152ccb561414e3c0595297eb7f86980
 
 on:
-  release:
+  release
     types: [published]
 
-<<<<<<< HEAD
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,7 +31,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-3.10-${{ hashFiles('package.json') }}
+        key: ${{ runner.os }}-pip-3.10-${{ hashFiles('pyproject.toml') }}
         restore-keys: |
           ${{ runner.os }}-pip-3.10-
     - name: Build extension package
@@ -47,7 +43,6 @@ jobs:
       # if: startsWith(github.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-=======
 permissions:
   contents: read
 
@@ -72,5 +67,4 @@ jobs:
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
         user: __token__
->>>>>>> e0aa78494152ccb561414e3c0595297eb7f86980
         password: ${{ secrets.PYPI_API_TOKEN }}
