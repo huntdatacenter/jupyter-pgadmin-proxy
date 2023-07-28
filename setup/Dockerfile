@@ -5,9 +5,6 @@ RUN set -x \
     && apt-get update \
     && apt-get install -y curl postgresql-client
 
-WORKDIR /etc/pgadmin
-COPY setup/config_system.py /etc/pgadmin/config_system.py
-
 # setup package, enable classic extension, build lab extension
 # USER "${NB_USER}"
 RUN mamba install -q -c conda-forge -y uwsgi simple-websocket psycopg
@@ -31,5 +28,8 @@ RUN cp /etc/jupyter/jupyter_notebook_config.py /etc/jupyter/jupyter_notebook_con
 COPY setup/jupyter_notebook_config.py /etc/jupyter/jupyter_notebook_config.py
 RUN fix-permissions /etc/jupyter
 
+WORKDIR /etc/pgadmin
+COPY setup/config_system.py /etc/pgadmin/config_system.py
 
 USER "${NB_USER}"
+WORKDIR "${HOME}"

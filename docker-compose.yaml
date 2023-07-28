@@ -16,6 +16,7 @@ services:
       PGDATABASE: postgres
       PGUSER: postgres
       PGPASSWORD: postgres
+      # PGADMIN_ENABLED: 'false'
     volumes:
       - "${PWD}:/home/jovyan/jupyter-pgadmin-proxy"
   postgres:
@@ -28,9 +29,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - db:/var/lib/postgresql/data
+      - pgtestdb:/var/lib/postgresql/data
 
 volumes:
-  db:
-    name: db
+  pgtestdb: {}
 

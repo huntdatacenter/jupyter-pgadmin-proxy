@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jupyter-pgadmin-proxy"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Matus Kosut", email="matus.kosut@ntnu.no" },
   { name="Diepiriye Okujagu", email="diepiriye.d.okujagu@ntnu.no" },
@@ -14,11 +14,11 @@ readme = "README.md"
 license = { file = "LICENSE.md" }
 requires-python = ">=3.8"
 dependencies = [
-    "jupyter-server-proxy>=3.2.2",
+    "jupyter-server-proxy>=3.2.2,<4.0.0",
     "pgadmin4",
     "simple-websocket",
     "psycopg",
-    "uwsgi"
+    "gunicorn",
 ]
 classifiers = [
     "Framework :: Jupyter",
