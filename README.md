@@ -32,7 +32,7 @@ make help
 
 ```
 python3 -m pip install git+https://github.com/huntdatacenter/jupyter-pgadmin-proxy.git@main
-``
+```
 
 ## Testing in docker
 
